@@ -1,0 +1,57 @@
+{
+  "name": "vite-backend-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/vite-backend-app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/vite-backend-app",
+        "main": "apps/vite-backend-app/src/main.ts",
+        "tsConfig": "apps/vite-backend-app/tsconfig.app.json",
+        "assets": ["apps/vite-backend-app/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/vite-backend-app/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "vite-backend-app:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "vite-backend-app:build:development"
+        },
+        "production": {
+          "buildTarget": "vite-backend-app:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/vite-backend-app/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/vite-backend-app/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
