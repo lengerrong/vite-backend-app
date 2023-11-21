@@ -5,18 +5,13 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/webpack:webpack",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "target": "node",
-        "compiler": "tsc",
         "outputPath": "dist/apps/vite-backend-app",
-        "main": "apps/vite-backend-app/src/main.ts",
-        "tsConfig": "apps/vite-backend-app/tsconfig.app.json",
-        "assets": ["apps/vite-backend-app/src/assets"],
-        "isolatedConfig": true,
-        "webpackConfig": "apps/vite-backend-app/webpack.config.js"
+        "ssr": "src/main.ts",
+        "outputFileName": "main.mjs"
       },
       "configurations": {
         "development": {},
